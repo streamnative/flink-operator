@@ -55,7 +55,7 @@ run: generate fmt vet
 
 # Generate manifests e.g. CRD, RBAC etc.
 manifests: controller-gen
-	$(CONTROLLER_GEN) $(CRD_OPTIONS) rbac:roleName=manager-role webhook paths="./api/v1beta1/..." output:crd:artifacts:config=config/crd/bases
+	$(CONTROLLER_GEN) $(CRD_OPTIONS) rbac:roleName=manager-role webhook paths="./api/v1beta1/..." sideEffectsstring=Some output:crd:artifacts:config=config/crd/bases
 	go mod tidy
 
 # Run go fmt against code
@@ -100,7 +100,7 @@ builder-image:
 	docker build -t flink-operator-builder -f Dockerfile.builder .
 
 # Build the Flink Operator docker image
-operator-image: builder-image test-in-docker
+operator-image: builder-image # test-in-docker
 	docker build  -t ${IMG} --label git-commit=$(shell git rev-parse HEAD) .
 	@echo "updating kustomize image patch file for Flink Operator resource"
 
@@ -108,10 +108,7 @@ operator-image: builder-image test-in-docker
 push-operator-image:
 	docker push ${IMG}
 
-# no need to build the image unless the repo has changes from the upstream
-docker-build:
-	docker pull ${UPSTREAM_IMG}
-	docker tag ${UPSTREAM_IMG} ${IMG}
+docker-build: operator-image
 
 # Push the docker image
 docker-push:
