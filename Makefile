@@ -194,3 +194,6 @@ bundle: kustomize
 # Build the bundle image.
 bundle-build:
 	docker build -f bundle.Dockerfile -t $(BUNDLE_IMG) .
+
+bundle-push:
+	docker push $(BUNDLE_IMG)
