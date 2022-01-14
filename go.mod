@@ -1,4 +1,4 @@
-module github.com/googlecloudplatform/flink-operator
+module github.com/streamnative/flink-operator
 
 go 1.14
 
