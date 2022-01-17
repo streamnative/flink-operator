@@ -100,7 +100,7 @@ builder-image:
 	docker build -t flink-operator-builder -f Dockerfile.builder .
 
 # Build the Flink Operator docker image
-operator-image: builder-image test-in-docker
+operator-image: builder-image # test-in-docker
 	docker build  -t ${IMG} --label git-commit=$(shell git rev-parse HEAD) .
 	@echo "updating kustomize image patch file for Flink Operator resource"
 
@@ -108,10 +108,7 @@ operator-image: builder-image test-in-docker
 push-operator-image:
 	docker push ${IMG}
 
-# no need to build the image unless the repo has changes from the upstream
-docker-build:
-	docker pull ${UPSTREAM_IMG}
-	docker tag ${UPSTREAM_IMG} ${IMG}
+docker-build: operator-image
 
 # Push the docker image
 docker-push:
@@ -197,3 +194,6 @@ bundle: kustomize
 # Build the bundle image.
 bundle-build:
 	docker build -f bundle.Dockerfile -t $(BUNDLE_IMG) .
+
+bundle-push:
+	docker push $(BUNDLE_IMG)
