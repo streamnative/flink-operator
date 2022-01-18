@@ -10,7 +10,7 @@ controller-runtime and Kubebuilder is required to understand this project.
 
 The Flink custom resource is defined in Go struct [FlinkCluster](../api/v1beta1/flinkcluster_types.go),
 then Kubebuild generates related Go files and YAML files, e.g.
-[flinkclusters.yaml](../config/crd/bases/flinkoperator.k8s.io_flinkclusters.yaml).
+[flinkclusters.yaml](../config/crd/bases/flinkoperator.streamnative.io_flinkclusters.yaml).
 The custom logic for reconciling a Flink custom resource is inside of the
 [controllers](../controllers) directory, e.g., [flinkcluster_controller.go](../controllers/flinkcluster_controller.go).
 

@@ -80,7 +80,7 @@ application.
 `flinkcluster_clickcount.yaml`:
 
 ```yaml
-apiVersion: flinkoperator.k8s.io/v1beta1
+apiVersion: flinkoperator.streamnative.io/v1beta1
 kind: FlinkCluster
 metadata:
   name: flinkcluster-clickcount

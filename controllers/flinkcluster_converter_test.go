@@ -22,7 +22,7 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp/cmpopts"
-	v1beta1 "github.com/googlecloudplatform/flink-operator/api/v1beta1"
+	v1beta1 "github.com/streamnative/flink-operator/api/v1beta1"
 	"gotest.tools/assert"
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
@@ -126,7 +126,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 		cluster: &v1beta1.FlinkCluster{
 			TypeMeta: metav1.TypeMeta{
 				Kind:       "FlinkCluster",
-				APIVersion: "flinkoperator.k8s.io/v1beta1",
+				APIVersion: "flinkoperator.streamnative.io/v1beta1",
 			},
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      "flinkjobcluster-sample",
@@ -296,7 +296,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
-					APIVersion:         "flinkoperator.k8s.io/v1beta1",
+					APIVersion:         "flinkoperator.streamnative.io/v1beta1",
 					Kind:               "FlinkCluster",
 					Name:               "flinkjobcluster-sample",
 					Controller:         &controller,
@@ -471,7 +471,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
-					APIVersion:         "flinkoperator.k8s.io/v1beta1",
+					APIVersion:         "flinkoperator.streamnative.io/v1beta1",
 					Kind:               "FlinkCluster",
 					Name:               "flinkjobcluster-sample",
 					Controller:         &controller,
@@ -518,7 +518,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
-					APIVersion:         "flinkoperator.k8s.io/v1beta1",
+					APIVersion:         "flinkoperator.streamnative.io/v1beta1",
 					Kind:               "FlinkCluster",
 					Name:               "flinkjobcluster-sample",
 					Controller:         &controller,
@@ -565,7 +565,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
-					APIVersion:         "flinkoperator.k8s.io/v1beta1",
+					APIVersion:         "flinkoperator.streamnative.io/v1beta1",
 					Kind:               "FlinkCluster",
 					Name:               "flinkjobcluster-sample",
 					Controller:         &controller,
@@ -574,8 +574,8 @@ func TestGetDesiredClusterState(t *testing.T) {
 			},
 		},
 		Spec: appsv1.StatefulSetSpec{
-			Replicas: &replicas,
-			ServiceName: "flinkjobcluster-sample-taskmanager",
+			Replicas:            &replicas,
+			ServiceName:         "flinkjobcluster-sample-taskmanager",
 			PodManagementPolicy: "Parallel",
 			Selector: &metav1.LabelSelector{
 				MatchLabels: map[string]string{
@@ -741,7 +741,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 				RevisionNameLabel: "flinkjobcluster-sample-85dc8f749",
 			},
 			OwnerReferences: []metav1.OwnerReference{
-				{APIVersion: "flinkoperator.k8s.io/v1beta1",
+				{APIVersion: "flinkoperator.streamnative.io/v1beta1",
 					Kind:               "FlinkCluster",
 					Name:               "flinkjobcluster-sample",
 					Controller:         &controller,
@@ -915,7 +915,7 @@ taskmanager.rpc.port: 6122
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
-					APIVersion:         "flinkoperator.k8s.io/v1beta1",
+					APIVersion:         "flinkoperator.streamnative.io/v1beta1",
 					Kind:               "FlinkCluster",
 					Name:               "flinkjobcluster-sample",
 					Controller:         &controller,

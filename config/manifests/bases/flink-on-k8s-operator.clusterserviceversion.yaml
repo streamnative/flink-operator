@@ -15,7 +15,7 @@ spec:
     - description: FlinkCluster is the Schema for the flinkclusters API
       displayName: Flink Cluster
       kind: FlinkCluster
-      name: flinkclusters.flinkoperator.k8s.io
+      name: flinkclusters.flinkoperator.streamnative.io
       version: v1beta1
   description: Flink operator
   displayName: Flink Operator

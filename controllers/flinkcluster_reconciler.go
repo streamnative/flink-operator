@@ -20,7 +20,6 @@ import (
 	"context"
 	"fmt"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/tools/record"
 	"k8s.io/client-go/util/retry"
@@ -28,10 +27,10 @@ import (
 	"time"
 
 	"github.com/go-logr/logr"
-	v1beta1 "github.com/googlecloudplatform/flink-operator/api/v1beta1"
-	"github.com/googlecloudplatform/flink-operator/controllers/batchscheduler"
-	"github.com/googlecloudplatform/flink-operator/controllers/flinkclient"
-	"github.com/googlecloudplatform/flink-operator/controllers/model"
+	v1beta1 "github.com/streamnative/flink-operator/api/v1beta1"
+	"github.com/streamnative/flink-operator/controllers/batchscheduler"
+	"github.com/streamnative/flink-operator/controllers/flinkclient"
+	"github.com/streamnative/flink-operator/controllers/model"
 
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
@@ -178,7 +177,7 @@ func (reconciler *ClusterReconciler) createStatefulSet(
 	return err
 }
 
-func (reconciler *ClusterReconciler) deleteOldComponent(desired runtime.Object, observed runtime.Object, component string) error {
+func (reconciler *ClusterReconciler) deleteOldComponent(desired client.Object, observed client.Object, component string) error {
 	var log = reconciler.log.WithValues("component", component)
 	if isComponentUpdated(observed, *reconciler.observed.cluster) {
 		reconciler.log.Info(fmt.Sprintf("%v is already updated, no action", component))
@@ -197,7 +196,7 @@ func (reconciler *ClusterReconciler) deleteOldComponent(desired runtime.Object, 
 	return nil
 }
 
-func (reconciler *ClusterReconciler) updateComponent(desired runtime.Object, component string) error {
+func (reconciler *ClusterReconciler) updateComponent(desired client.Object, component string) error {
 	var log = reconciler.log.WithValues("component", component)
 	var context = reconciler.context
 	var k8sClient = reconciler.k8sClient

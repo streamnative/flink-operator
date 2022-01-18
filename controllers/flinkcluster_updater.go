@@ -29,7 +29,7 @@ import (
 	"time"
 
 	"github.com/go-logr/logr"
-	v1beta1 "github.com/googlecloudplatform/flink-operator/api/v1beta1"
+	v1beta1 "github.com/streamnative/flink-operator/api/v1beta1"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/tools/record"
@@ -933,7 +933,7 @@ func (updater *ClusterStatusUpdater) clearControlAnnotation(newControlStatus *v1
 		if err != nil {
 			return err
 		}
-		return updater.k8sClient.Patch(updater.context, updater.observed.cluster, client.ConstantPatch(types.MergePatchType, patchBytes))
+		return updater.k8sClient.Patch(updater.context, updater.observed.cluster, client.RawPatch(types.MergePatchType, patchBytes))
 	}
 
 	return nil

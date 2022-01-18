@@ -13,7 +13,7 @@ The instructions to install the Flink operator chart:
     * `export IMG=<image-name>` - Operator image, defaults to `flink-operator:latest`
     * `export NS=<namespace-name>` - Namespace to install the operator in, defaults to `flink-operator-system`
 
-3. Register CRD - Don't manually register CRD unless helm install below fails (You can skip this step if your helm version is v3). 
+3. Register CRD - Don't manually register CRD unless helm install below fails (You can skip this step if your helm version is v3). **This command here is installing the CRD from google not our streamnative CRD** 
     
     ```bash
    kubectl create -f https://raw.githubusercontent.com/GoogleCloudPlatform/flink-on-k8s-operator/master/config/crd/bases/flinkoperator.k8s.io_flinkclusters.yaml
@@ -21,10 +21,10 @@ The instructions to install the Flink operator chart:
 
 4. Finally operator chart can be installed by running:
 
-	```bash
-	helm repo add flink-operator-repo https://googlecloudplatform.github.io/flink-on-k8s-operator/
-	helm install --name [RELEASE_NAME] flink-operator-repo/flink-operator --set operatorImage.name=[IMAGE_NAME]
-	```
+    ```bash
+    helm repo add flink-operator-repo https://googlecloudplatform.github.io/flink-on-k8s-operator/
+    helm install --name [RELEASE_NAME] flink-operator-repo/flink-operator --set operatorImage.name=[IMAGE_NAME]
+    ```
     or to install it using local repo with command:
 
     ```bash
@@ -47,5 +47,5 @@ To uninstall your release:
 CRD created by this chart are not deleted by helm uninstall. CRD deletion causes terminating all FlinkCluster CRs and related kubernetes resources, therefore it should be deleted carefully, You can manually clean up CRD:
 
   ```bash
-  kubectl delete crd flinkclusters.flinkoperator.k8s.io
+  kubectl delete crd flinkclusters.flinkoperator.streamnative.io
   ```

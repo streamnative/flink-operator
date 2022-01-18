@@ -9,7 +9,7 @@ them later. This document introduces how the Flink Operator can help you manage 
 First, you can start a job from a savepoint by specifying the `fromSavepoint` property in the job spec, for example:
 
 ```yaml
-apiVersion: flinkoperator.k8s.io/v1beta1
+apiVersion: flinkoperator.streamnative.io/v1beta1
 kind: FlinkCluster
 metadata:
   name: flinkjobcluster-sample
@@ -35,7 +35,7 @@ You can let the operator to take savepoints for you automatically by specifying 
 `gs://my-bucket/savepoints/` GCS folder every 300 seconds.
 
 ```yaml
-apiVersion: flinkoperator.k8s.io/v1beta1
+apiVersion: flinkoperator.streamnative.io/v1beta1
 kind: FlinkCluster
 metadata:
   name: flinkjobcluster-sample
@@ -54,7 +54,7 @@ kubectl describe flinkclusters flinkjobcluster-sample
 
 Name:         flinkjobcluster-sample
 Namespace:    default
-API Version:  flinkoperator.k8s.io/v1beta1
+API Version:  flinkoperator.streamnative.io/v1beta1
 Kind:         FlinkCluster
 Spec:
   ...
@@ -84,7 +84,7 @@ For example, if the current savepoint generation in the job status is 2, you can
 the `savepointGeneration` in the job spec to 3 as below:
 
 ```yaml
-apiVersion: flinkoperator.k8s.io/v1beta1
+apiVersion: flinkoperator.streamnative.io/v1beta1
 kind: FlinkCluster
 metadata:
   name: flinkjobcluster-sample
@@ -109,7 +109,7 @@ kubectl describe flinkclusters flinkjobcluster-sample
 
 Name:         flinkjobcluster-sample
 Namespace:    default
-API Version:  flinkoperator.k8s.io/v1beta1
+API Version:  flinkoperator.streamnative.io/v1beta1
 Kind:         FlinkCluster
 Spec:
   ...
@@ -134,13 +134,13 @@ You can take a savepoint by attaching control annotation to your FlinkCluster's 
 ```
 metadata:
   annotations:
-    flinkclusters.flinkoperator.k8s.io/user-control: savepoint
+    flinkclusters.flinkoperator.streamnative.io/user-control: savepoint
 ```
 
 You can attach the annotation with "kubectl apply" like above or "kubectl annotate":
 
 ```bash
-kubectl annotate flinkclusters flinkjobcluster-sample flinkclusters.flinkoperator.k8s.io/user-control=savepoint
+kubectl annotate flinkclusters flinkjobcluster-sample flinkclusters.flinkoperator.streamnative.io/user-control=savepoint
 ```
 
 When savepoint control is finished, you can check the progress and the result in the control status and the job status
@@ -149,7 +149,7 @@ kubectl describe flinkcluster flinkjobcluster-sample
 
 Name:         flinkjobcluster-sample
 Namespace:    default
-API Version:  flinkoperator.k8s.io/v1beta1
+API Version:  flinkoperator.streamnative.io/v1beta1
 Kind:         FlinkCluster
 Spec:
   ...
@@ -217,7 +217,7 @@ create a new job cluster. But this is a tedious process, fortunately the operato
 to do is set the `restartPolicy` property to `FromSavepointOnFailure` in the job spec, for example:
 
 ```yaml
-apiVersion: flinkoperator.k8s.io/v1beta1
+apiVersion: flinkoperator.streamnative.io/v1beta1
 kind: FlinkCluster
 metadata:
   name: flinkjobcluster-sample
