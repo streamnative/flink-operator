@@ -18,13 +18,13 @@ package controllers
 
 import (
 	"context"
-	"github.com/googlecloudplatform/flink-operator/controllers/history"
+	"github.com/streamnative/flink-operator/controllers/history"
 	"time"
 
 	"github.com/go-logr/logr"
-	v1beta1 "github.com/googlecloudplatform/flink-operator/api/v1beta1"
-	"github.com/googlecloudplatform/flink-operator/controllers/flinkclient"
-	"github.com/googlecloudplatform/flink-operator/controllers/model"
+	v1beta1 "github.com/streamnative/flink-operator/api/v1beta1"
+	"github.com/streamnative/flink-operator/controllers/flinkclient"
+	"github.com/streamnative/flink-operator/controllers/model"
 
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
@@ -44,8 +44,8 @@ type FlinkClusterReconciler struct {
 	Mgr    ctrl.Manager
 }
 
-// +kubebuilder:rbac:groups=flinkoperator.k8s.io,resources=flinkclusters,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=flinkoperator.k8s.io,resources=flinkclusters/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=flinkoperator.streamnative.io,resources=flinkclusters,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=flinkoperator.streamnative.io,resources=flinkclusters/status,verbs=get;update;patch
 // +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=apps,resources=deployments/status,verbs=get
 // +kubebuilder:rbac:groups=apps,resources=statefulsets,verbs=get;list;watch;create;update;patch;delete
@@ -64,6 +64,7 @@ type FlinkClusterReconciler struct {
 
 // Reconcile the observed state towards the desired state for a FlinkCluster custom resource.
 func (reconciler *FlinkClusterReconciler) Reconcile(
+	ctx context.Context,
 	request ctrl.Request) (ctrl.Result, error) {
 	var log = reconciler.Log.WithValues(
 		"cluster", request.NamespacedName)

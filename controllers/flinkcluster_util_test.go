@@ -17,7 +17,7 @@ limitations under the License.
 package controllers
 
 import (
-	"github.com/googlecloudplatform/flink-operator/controllers/flinkclient"
+	"github.com/streamnative/flink-operator/controllers/flinkclient"
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -29,7 +29,7 @@ import (
 	"testing"
 	"time"
 
-	v1beta1 "github.com/googlecloudplatform/flink-operator/api/v1beta1"
+	v1beta1 "github.com/streamnative/flink-operator/api/v1beta1"
 	"gotest.tools/assert"
 )
 
@@ -141,12 +141,12 @@ func TestNewRevision(t *testing.T) {
 			Name:      "mycluster-6d95c76b9c",
 			Namespace: "default",
 			Labels: map[string]string{
-				"flinkoperator.k8s.io/hash":       "6d95c76b9c",
-				"flinkoperator.k8s.io/managed-by": "mycluster",
+				"flinkoperator.streamnative.io/hash":       "6d95c76b9c",
+				"flinkoperator.streamnative.io/managed-by": "mycluster",
 			},
 			Annotations: map[string]string{},
 			OwnerReferences: []metav1.OwnerReference{{
-				APIVersion:         "flinkoperator.k8s.io/v1beta1",
+				APIVersion:         "flinkoperator.streamnative.io/v1beta1",
 				Kind:               "FlinkCluster",
 				Name:               "mycluster",
 				Controller:         &controller,

@@ -29,8 +29,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/googlecloudplatform/flink-operator/api/v1beta1"
-	"github.com/googlecloudplatform/flink-operator/controllers"
+	"github.com/streamnative/flink-operator/api/v1beta1"
+	"github.com/streamnative/flink-operator/controllers"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -62,7 +62,7 @@ func main() {
 		"Watch custom resources in the namespace, ignore other namespaces. If empty, all namespaces will be watched.")
 	flag.Parse()
 
-	ctrl.SetLogger(zap.Logger(true))
+	ctrl.SetLogger(zap.New(zap.UseDevMode(true)))
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:             scheme,

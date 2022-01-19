@@ -81,17 +81,17 @@ Note, for kubernetes cluster with private cluster domain, you should add a CLUST
 
 ## Verify the deployment
 
-After deploying the operator, you can verify CRD `flinkclusters.flinkoperator.k8s.io`
+After deploying the operator, you can verify CRD `flinkclusters.flinkoperator.streamnative.io`
 has been created:
 
 ```bash
-kubectl get crds | grep flinkclusters.flinkoperator.k8s.io
+kubectl get crds | grep flinkclusters.flinkoperator.streamnative.io
 ```
 
 View the details of the CRD:
 
 ```bash
-kubectl describe crds/flinkclusters.flinkoperator.k8s.io
+kubectl describe crds/flinkclusters.flinkoperator.streamnative.io
 ```
 
 Find out the deployment:
@@ -350,13 +350,13 @@ If you want to cancel a running Flink job, attach control annotation to your Fli
 ```
 metadata:
   annotations:
-    flinkclusters.flinkoperator.k8s.io/user-control: job-cancel
+    flinkclusters.flinkoperator.streamnative.io/user-control: job-cancel
 ```
 
 You can attach the annotation:
 
 ```bash
-kubectl annotate flinkclusters <CLUSTER-NAME> flinkclusters.flinkoperator.k8s.io/user-control=job-cancel
+kubectl annotate flinkclusters <CLUSTER-NAME> flinkclusters.flinkoperator.streamnative.io/user-control=job-cancel
 ```
 
 When canceling, all Pods that make up the Flink cluster are basically terminated.

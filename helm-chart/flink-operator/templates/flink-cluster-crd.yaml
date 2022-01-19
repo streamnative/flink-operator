@@ -11,9 +11,9 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.3.0
     meta.helm.sh/release-namespace: {{ .Release.Namespace }}
   creationTimestamp: null
-  name: flinkclusters.flinkoperator.k8s.io
+  name: flinkclusters.flinkoperator.streamnative.io
 spec:
-  group: flinkoperator.k8s.io
+  group: flinkoperator.streamnative.io
   names:
     kind: FlinkCluster
     listKind: FlinkClusterList

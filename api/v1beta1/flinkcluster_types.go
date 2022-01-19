@@ -78,7 +78,7 @@ const (
 // User requested control
 const (
 	// control annotation key
-	ControlAnnotation = "flinkclusters.flinkoperator.k8s.io/user-control"
+	ControlAnnotation = "flinkclusters.flinkoperator.streamnative.io/user-control"
 
 	// control name
 	ControlNameSavepoint = "savepoint"

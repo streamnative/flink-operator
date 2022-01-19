@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	v1beta1 "github.com/googlecloudplatform/flink-operator/api/v1beta1"
-	"github.com/googlecloudplatform/flink-operator/controllers/history"
+	v1beta1 "github.com/streamnative/flink-operator/api/v1beta1"
+	"github.com/streamnative/flink-operator/controllers/history"
 	"gopkg.in/yaml.v2"
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
@@ -31,6 +31,7 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 	"os"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"strconv"
 	"strings"
 	"time"
@@ -44,7 +45,7 @@ const (
 
 	SavepointTimeoutSec = 900 // 15 mins
 
-	RevisionNameLabel = "flinkoperator.k8s.io/revision-name"
+	RevisionNameLabel = "flinkoperator.streamnative.io/revision-name"
 
 	// TODO: need to be user configurable
 	SavepointAgeForJobUpdateSec      = 300
@@ -424,10 +425,10 @@ func hasTimeElapsed(timeToCheckStr string, now time.Time, intervalSec int) bool 
 }
 
 // isComponentUpdated checks whether the component updated.
-// If the component is observed as well as the next revision name in status.nextRevision and component's label `flinkoperator.k8s.io/hash` are equal, then it is updated already.
+// If the component is observed as well as the next revision name in status.nextRevision and component's label `flinkoperator.streamnative.io/hash` are equal, then it is updated already.
 // If the component is not observed and it is required, then it is not updated yet.
 // If the component is not observed and it is optional, but it is specified in the spec, then it is not updated yet.
-func isComponentUpdated(component runtime.Object, cluster v1beta1.FlinkCluster) bool {
+func isComponentUpdated(component client.Object, cluster v1beta1.FlinkCluster) bool {
 	if !isUpdateTriggered(cluster.Status) {
 		return true
 	}
@@ -472,7 +473,7 @@ func isComponentUpdated(component runtime.Object, cluster v1beta1.FlinkCluster) 
 	return labels[RevisionNameLabel] == nextRevisionName
 }
 
-func areComponentsUpdated(components []runtime.Object, cluster v1beta1.FlinkCluster) bool {
+func areComponentsUpdated(components []client.Object, cluster v1beta1.FlinkCluster) bool {
 	for _, c := range components {
 		if !isComponentUpdated(c, cluster) {
 			return false
@@ -482,7 +483,7 @@ func areComponentsUpdated(components []runtime.Object, cluster v1beta1.FlinkClus
 }
 
 func isUpdatedAll(observed ObservedClusterState) bool {
-	components := []runtime.Object{
+	components := []client.Object{
 		observed.configMap,
 		observed.jmStatefulSet,
 		observed.tmStatefulSet,
@@ -498,7 +499,7 @@ func isClusterUpdateToDate(observed ObservedClusterState) bool {
 	if !isUpdateTriggered(observed.cluster.Status) {
 		return true
 	}
-	components := []runtime.Object{
+	components := []client.Object{
 		observed.configMap,
 		observed.jmStatefulSet,
 		observed.tmStatefulSet,

@@ -42,8 +42,8 @@ import (
 )
 
 // ControllerRevisionHashLabel is the label used to indicate the hash value of a ControllerRevision's Data.
-const ControllerRevisionHashLabel = "flinkoperator.k8s.io/hash"
-const ControllerRevisionManagedByLabel = "flinkoperator.k8s.io/managed-by"
+const ControllerRevisionHashLabel = "flinkoperator.streamnative.io/hash"
+const ControllerRevisionManagedByLabel = "flinkoperator.streamnative.io/managed-by"
 
 // ControllerRevisionName returns the Name for a ControllerRevision in the form prefix-hash. If the length
 // of prefix is greater than 223 bytes, it is truncated to allow for a name that is no larger than 253 bytes.
@@ -320,14 +320,14 @@ func (rh *realHistory) AdoptControllerRevision(parent metav1.Object, parentKind 
 		return nil, err
 	}
 	// Use strategic merge patch to add an owner reference indicating a controller ref
-	err = rh.Patch(rh.context, revision, client.ConstantPatch(types.StrategicMergePatchType, patchBytes))
+	err = rh.Patch(rh.context, revision, client.RawPatch(types.StrategicMergePatchType, patchBytes))
 
 	return revision, err
 }
 
 func (rh *realHistory) ReleaseControllerRevision(parent metav1.Object, revision *apps.ControllerRevision) (*apps.ControllerRevision, error) {
 	// Use strategic merge patch to add an owner reference indicating a controller ref
-	err := rh.Patch(rh.context, revision, client.ConstantPatch(types.StrategicMergePatchType, []byte(fmt.Sprintf(`{"metadata":{"ownerReferences":[{"$patch":"delete","uid":"%s"}],"uid":"%s"}}`, parent.GetUID(), revision.UID))))
+	err := rh.Patch(rh.context, revision, client.RawPatch(types.StrategicMergePatchType, []byte(fmt.Sprintf(`{"metadata":{"ownerReferences":[{"$patch":"delete","uid":"%s"}],"uid":"%s"}}`, parent.GetUID(), revision.UID))))
 
 	if err != nil {
 		if errors.IsNotFound(err) {
