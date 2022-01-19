@@ -1,6 +1,6 @@
 # K8s namespace where Flink operator to be deployed
 flinkOperatorNamespace:
-  name: "flink-operator-system"
+  name: "sn-system"
 
 # Watch custom resources in the namespace, ignore other namespaces. If empty, all namespaces will be watched.
 watchNamespace:
@@ -14,8 +14,9 @@ rbac:
 
 # The defination of the operator image
 operatorImage:
-  name:
+  name: gcr.io/affable-ray-226821/streamnative/pulsar-operators/operator/flink-on-k8s-operator:v0.8.8
   pullPolicy: IfNotPresent
+  imagePullSecrets: sn-gcr-reg
 
 serviceAccount:
   # Specifies whether a service account should be created
