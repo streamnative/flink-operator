@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOPRIVATE: github.com/streamnative
-      IMAGE_BASE: docker.cloudsmith.io/streamnative/operators/flink-on-k8s-operator
+      IMAGE_BASE: docker.cloudsmith.io/streamnative/operators/flink-operator
 
     steps:
       - name: Set up Go 1.16

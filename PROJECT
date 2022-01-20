@@ -1,7 +1,7 @@
 version: "3"
-layout: 
+layout:
 - go.kubebuilder.io/v2
-projectName: flink-on-k8s-operator
+projectName: flink-operator
 domain: k8s.io
 repo: github.com/googlecloudplatform/flink-operator
 resources:
