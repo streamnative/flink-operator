@@ -2,12 +2,12 @@ version: "3"
 layout:
 - go.kubebuilder.io/v2
 projectName: flink-operator
-domain: k8s.io
-repo: github.com/googlecloudplatform/flink-operator
+domain: streamnative.io
+repo: github.com/streamnative/flink-operator
 resources:
 - controller: true
   domain: k8s.io
-  path: flinkoperator.k8s.io/api/v1beta1
+  path: flinkoperator.streamnative.io/api/v1beta1
   group: flinkoperator
   version: v1beta1
   kind: FlinkCluster
