@@ -17,7 +17,7 @@ webhooks:
   name: mflinkcluster.flinkoperator.streamnative.io
   rules:
   - apiGroups:
-    - flinkoperator.k8s.io
+    - flinkoperator.streamnative.io
     apiVersions:
     - v1beta1
     operations:
@@ -45,7 +45,7 @@ webhooks:
   name: vflinkcluster.flinkoperator.streamnative.io
   rules:
   - apiGroups:
-    - flinkoperator.k8s.io
+    - flinkoperator.streamnative.io
     apiVersions:
     - v1beta1
     operations:
