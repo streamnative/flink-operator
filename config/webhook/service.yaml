@@ -21,7 +21,7 @@ spec:
   ports:
     - port: 443
       name: https-webhook-server
-      targetPort: 443
+      targetPort: 9443
   selector:
     app: flink-operator
     control-plane: controller-manager
