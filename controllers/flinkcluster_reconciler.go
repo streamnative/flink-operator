@@ -517,12 +517,13 @@ func (reconciler *ClusterReconciler) reconcileJob() (ctrl.Result, error) {
 
 		// Trigger savepoint if required.
 		if len(jobID) > 0 {
-			shouldTakeSavepont, savepointTriggerReason := reconciler.shouldTakeSavepoint()
-			if shouldTakeSavepont {
+			if shouldTakeSavepoint, savepointTriggerReason := reconciler.shouldTakeSavepoint(); shouldTakeSavepoint {
 				err = reconciler.updateSavepointTriggerTimeStatus()
 				if err != nil {
-					newSavepointStatus, _ = reconciler.takeSavepointAsync(jobID, savepointTriggerReason)
+					log.Error(err, "Failed to update savepoint trigger time. Skip this savepoint...", "jobID", jobID)
+					return requeueResult, nil
 				}
+				newSavepointStatus, _ = reconciler.takeSavepointAsync(jobID, savepointTriggerReason)
 			}
 		}
 		log.Info("Job is not finished yet, no action", "jobID", jobID)
