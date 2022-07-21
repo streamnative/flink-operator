@@ -159,6 +159,24 @@ rules:
   - ingresses/status
   verbs:
   - get
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses/status
+  verbs:
+  - get
 - apiGroups: 
   - admissionregistration.k8s.io
   resources:
