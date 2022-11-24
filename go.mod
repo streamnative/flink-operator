@@ -2,6 +2,9 @@ module github.com/streamnative/flink-operator
 
 go 1.14
 
+replace github.com/streamnative/flink-operator/api => ./api
+replace sigs.k8s.io/controller-runtime => sigs.k8s.io/controller-runtime v0.9.0
+
 require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/go-logr/logr v0.4.0
@@ -15,7 +18,6 @@ require (
 	k8s.io/apimachinery v0.21.1
 	k8s.io/client-go v0.21.1
 	k8s.io/klog v1.0.0
-	sigs.k8s.io/controller-runtime v0.9.0
 	volcano.sh/volcano v0.0.0-20200615125001-3c3aaf766110
 )
 
