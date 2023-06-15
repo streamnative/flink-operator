@@ -1,4 +1,3 @@
-
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
@@ -17,7 +16,7 @@ webhooks:
   name: mflinkcluster.flinkoperator.streamnative.io
   rules:
   - apiGroups:
-    - flinkoperator.streamnative.io
+    - flinkoperator.k8s.io
     apiVersions:
     - v1beta1
     operations:
@@ -26,7 +25,6 @@ webhooks:
     resources:
     - flinkclusters
   sideEffects: NoneOnDryRun
-
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
@@ -45,7 +43,7 @@ webhooks:
   name: vflinkcluster.flinkoperator.streamnative.io
   rules:
   - apiGroups:
-    - flinkoperator.streamnative.io
+    - flinkoperator.k8s.io
     apiVersions:
     - v1beta1
     operations:

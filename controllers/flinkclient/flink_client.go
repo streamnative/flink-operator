@@ -117,24 +117,24 @@ func (c *FlinkClient) TriggerSavepoint(
 //
 // 1) success:
 //
-// {
-//    "status":{"id":"COMPLETED"},
-//    "operation":{
-//      "location":"file:/tmp/savepoint-ad4025-dd46c1bd1c80"
-//    }
-// }
+//	{
+//	   "status":{"id":"COMPLETED"},
+//	   "operation":{
+//	     "location":"file:/tmp/savepoint-ad4025-dd46c1bd1c80"
+//	   }
+//	}
 //
 // 2) failure:
 //
-// {
-//    "status":{"id":"COMPLETED"},
-//    "operation":{
-//      "failure-cause":{
-//        "class": "java.util.concurrent.CompletionException",
-//        "stack-trace": "..."
-//      }
-//    }
-// }
+//	{
+//	   "status":{"id":"COMPLETED"},
+//	   "operation":{
+//	     "failure-cause":{
+//	       "class": "java.util.concurrent.CompletionException",
+//	       "stack-trace": "..."
+//	     }
+//	   }
+//	}
 func (c *FlinkClient) GetSavepointStatus(
 	apiBaseURL string, jobID string, triggerID string) (SavepointStatus, error) {
 	var url = fmt.Sprintf(
