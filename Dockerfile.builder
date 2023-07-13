@@ -14,7 +14,7 @@ FROM ubuntu:20.04
 RUN apt update && apt install -yqq curl git make gcc
 
 # Install Go
-RUN curl -s https://dl.google.com/go/go1.16.13.linux-amd64.tar.gz | tar -xz -C /usr/local/
+RUN curl -s https://dl.google.com/go/go1.18.10.linux-amd64.tar.gz | tar -xz -C /usr/local/
 ENV GOROOT=/usr/local/go
 ENV PATH=${PATH}:${GOROOT}/bin
 
@@ -30,6 +30,7 @@ COPY go.sum go.sum
 
 # Cache deps before building so that we don't need to re-download as much
 # and so that source changes don't invalidate our downloaded layer.
+RUN go mod tidy
 RUN go mod download
 
 # Copy the project source code
