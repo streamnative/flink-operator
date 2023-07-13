@@ -135,7 +135,7 @@ func getDesiredJobManagerStatefulSet(
 		},
 	}
 	var readinessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(*jobManagerSpec.Ports.RPC)),
 			},
@@ -146,7 +146,7 @@ func getDesiredJobManagerStatefulSet(
 		FailureThreshold:    60,
 	}
 	var livenessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(*jobManagerSpec.Ports.RPC)),
 			},
@@ -440,7 +440,7 @@ func getDesiredTaskManagerStatefulSet(
 		},
 	}
 	var readinessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(*taskManagerSpec.Ports.RPC)),
 			},
@@ -451,7 +451,7 @@ func getDesiredTaskManagerStatefulSet(
 		FailureThreshold:    60,
 	}
 	var livenessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(*taskManagerSpec.Ports.RPC)),
 			},

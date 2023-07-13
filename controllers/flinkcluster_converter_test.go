@@ -56,7 +56,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 	var memoryOffHeapMin = resource.MustParse("600M")
 	var jobBackoffLimit int32 = 0
 	var jmReadinessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(jmRPCPort)),
 			},
@@ -67,7 +67,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 		FailureThreshold:    60,
 	}
 	var jmLivenessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(jmRPCPort)),
 			},
@@ -78,7 +78,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 		FailureThreshold:    5,
 	}
 	var tmReadinessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(tmRPCPort)),
 			},
@@ -89,7 +89,7 @@ func TestGetDesiredClusterState(t *testing.T) {
 		FailureThreshold:    60,
 	}
 	var tmLivenessProbe = corev1.Probe{
-		Handler: corev1.Handler{
+		ProbeHandler: corev1.ProbeHandler{
 			TCPSocket: &corev1.TCPSocketAction{
 				Port: intstr.FromInt(int(tmRPCPort)),
 			},
